@@ -1,0 +1,132 @@
+syntax on
+filetype plugin indent on
+set guicursor=
+set noshowmatch
+"set relativenumber set nohlsearch
+set laststatus=2
+set hidden
+set noerrorbells
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set suffixesadd=.java
+set autoindent
+set smartindent
+set nu
+set nowrap
+set smartcase
+set noswapfile
+set nobackup
+set incsearch
+set termguicolors
+set scrolloff=8
+set noshowmode
+set clipboard=unnamedplus
+set t_Co=256
+
+set statusline=%t       "tail of the filename
+set statusline+=[%{strlen(&fenc)?&fenc:'none'}, "file encoding
+set statusline+=%{&ff}] "file format
+set statusline+=%h      "help file flag
+set statusline+=%m      "modified flag
+set statusline+=%r      "read only flag
+set statusline+=%y      "filetype set statusline+=%=      "left/right separator
+set statusline+=%c,     "cursor column
+set statusline+=%l/%L   "cursor line/total lines
+set statusline+=\ %P    "percent through file
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=50
+
+""inoremap " ""<left>
+""inoremap ' ''<left>
+""inoremap ( ()<left>
+""inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+
+call plug#begin('~/.vim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'sheerun/vim-polyglot'
+Plug 'ewilazarus/preto'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'flazz/vim-colorschemes'
+Plug 'jarun/nnn'
+Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+call plug#end()
+""" Customize colors
+func! s:my_colors_setup() abort
+    " this is an example
+    hi Pmenu guibg=#000000 gui=NONE
+    hi PmenuSel guibg=#000000 gui=NONE
+    hi PmenuSbar guibg=#000000
+    hi PmenuThumb guibg=#000000
+endfunc
+
+augroup colorscheme_coc_setup | au!
+    au ColorScheme * call s:my_colors_setup()
+augroup END
+
+let g:gruvbox_contrast_dark = 'hard'
+"if exists('+termguicolors')
+"    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"endif
+let g:gruvbox_invert_selection='0'
+
+colorscheme default
+set background=dark
+
+imap <F5> <Esc>:w<CR>:!clear;python3 %<CR>
+map <F8> <Esc>:w<CR>:!clear;javac %<CR>
+" --- vim go (polyglot) settings.
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_format_strings = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_auto_sameids = 1
+
+"hi Comment  guifg=#80a0ff ctermfg=red
+hi Comment guifg=green
+
+hi LineNr term=underline ctermfg=3 guifg=darkyellow
+hi Question term=standout ctermfg=2 gui=bold guifg=SeaGreen
+hi StatusLine term=bold,reverse cterm=bold,reverse gui=bold guifg=White guibg=Black
+hi StatusLineNC term=reverse cterm=reverse gui=bold guifg=Red guibg=Gray45
+hi VertSplit term=reverse cterm=reverse gui=bold guifg=White guibg=Gray45
+hi Title term=bold ctermfg=5 gui=bold guifg=Red
+hi Visual term=reverse cterm=reverse gui=reverse guifg=Grey80 guibg=fg
+hi VisualNOS term=bold,underline cterm=bold,underline gui=bold,underline
+hi WarningMsg term=standout ctermfg=1 gui=bold guifg=Red
+hi WildMenu term=standout ctermfg=0 ctermbg=3 guifg=Black guibg=Yellow
+hi Folded term=standout ctermfg=4 ctermbg=7 guifg=Black guibg=Red
+hi FoldColumn term=standout ctermfg=4 ctermbg=7 guifg=DarkBlue guibg=Gray80
+hi DiffAdd term=bold ctermbg=4 guibg=White
+hi DiffChange term=bold ctermbg=5 guibg=Red
+hi DiffDelete term=bold cterm=bold ctermfg=4 ctermbg=6 gui=bold guifg=Red guibg=Red
+hi DiffText term=reverse cterm=bold ctermbg=1 gui=bold guibg=Red
+hi Cursor guifg=bg guibg=fg
+hi lCursor guifg=bg guibg=fg
+
+
+hi Constant term=underline ctermfg=1 guifg=Red
+hi Special term=bold ctermfg=5 guifg=SlateBlue
+"hi Identifier term=underline ctermfg=6 guifg=DarkCyan
+hi Statement term=bold ctermfg=3 gui=bold guifg=Brown
+hi PreProc term=underline ctermfg=5 guifg=Magenta3
+hi Type term=underline ctermfg=2 gui=bold guifg=darkyellow                       
